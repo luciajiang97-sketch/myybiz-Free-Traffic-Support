@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYBIZ - Boost Your Online Store</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#ec4899',
+                        accent: '#f97316',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+            }
+            
+            .btn-primary {
+                @apply px-8 py-3 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300;
+            }
+            
+            .btn-secondary {
+                @apply px-8 py-3 bg-white text-gradient font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-gray-200;
+            }
+            
+            .card {
+                @apply bg-white rounded-2xl shadow-xl p-6 transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-2;
+            }
+            
+            .section-padding {
+                @apply py-20 md:py-28;
+            }
+            
+            .hero-gradient {
+                background: linear-gradient(135deg, #f5f7ff 0%, #ede9fe 100%);
+            }
+            
+            .package-card {
+                @apply rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl relative overflow-hidden;
+            }
+            
+            .package-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(to right, var(--tw-gradient-stops));
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-dark">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gradient">MYBIZ</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#features" class="font-medium hover:text-primary transition-colors">Features</a>
+                <a href="#packages" class="font-medium hover:text-primary transition-colors">Packages</a>
+                <a href="#testimonials" class="font-medium hover:text-primary transition-colors">Success Stories</a>
+                <a href="#faq" class="font-medium hover:text-primary transition-colors">FAQ</a>
+            </div>
+            <button class="btn-primary">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient section-padding">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                        Boost Your Online Store with <span class="text-gradient">Free Traffic Support</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 mb-8">
+                        Get matched with top promoters and $2,000 in ad credits, limited to first 10 qualified applicants.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#basic-package" class="btn-primary text-center">Explore Basic Package</a>
+                        <a href="#advanced-package" class="btn-secondary text-center">Explore Advanced Package</a>
+                    </div>
+                    <div class="mt-8 bg-white/80 backdrop-blur-sm rounded-lg p-4 inline-flex items-center">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">1</div>
+                            <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center text-xs font-bold">2</div>
+                            <div class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-xs font-bold">3</div>
+                            <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold">7+</div>
+                        </div>
+                        <p class="ml-4 text-sm text-gray-600">Only <span class="font-bold text-primary">7 spots</span> left for qualified applicants</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-all duration-500">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/c133028052a64d6d8934c2df146bad12~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=202604191510101AA58785C1B298D05E34&rrcfp=f06b921b&x-expires=1779174634&x-signature=zOyCOI%2FIRuso79SmuN7vKsQnyGI%3D" 
+                             alt="Social media influencers creating content" 
+                             class="w-full h-auto">
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-3xl"></div>
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-accent to-secondary rounded-full opacity-20 blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="bg-white py-6 border-b border-gray-100">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0">
+                <p class="text-center md:text-left font-medium">Hurry! <span class="text-primary font-bold">Free</span> offer ends in:</p>
+                <div class="flex space-x-4 md:space-x-8">
+                    <div id="days" class="flex flex-col items-center">
+                        <div class="text-2xl md:text-3xl font-bold text-primary">05</div>
+                        <div class="text-xs md:text-sm text-gray-500">Days</div>
+                    </div>
+                    <div id="hours" class="flex flex-col items-center">
+                        <div class="text-2xl md:text-3xl font-bold text-primary">12</div>
+                        <div class="text-xs md:text-sm text-gray-500">Hours</div>
+                    </div>
+                    <div id="minutes" class="flex flex-col items-center">
+                        <div class="text-2xl md:text-3xl font-bold text-primary">45</div>
+                        <div class="text-xs md:text-sm text-gray-500">Minutes</div>
+                    </div>
+                    <div id="seconds" class="flex flex-col items-center">
+                        <div class="text-2xl md:text-3xl font-bold text-primary">30</div>
+                        <div class="text-xs md:text-sm text-gray-500">Seconds</div>
+                    </div>
+                </div>
+                <p class="text-center md:text-right text-sm text-gray-500">April 30, 2026 at 11:59 PM PST</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What You'll Get</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Our program provides everything you need to boost your online store's visibility and sales
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Creator Collaborations -->
+                <div class="card bg-gradient-to-br from-white to-purple-50">
+                    <div class="flex items-start">
+                        <div class="bg-primary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-users text-2xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Promoter Collaborations</h3>
+                            <p class="text-gray-600 mb-4">
+                                Get matched with qualified promoters who will showcase your products to their engaged audiences
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fa fa-check text-green-500 mr-2"></i>
+                                    <span>Access to a network of vetted promoters</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa fa-check text-green-500 mr-2"></i>
+                                    <span>Professional product photography</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa fa-check text-green-500 mr-2"></i>
+                                    <span>Content created for multiple platforms</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 rounded-xl overflow-hidden">
+                        <img src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/e0e3d05dafcb45e9a1aa855fb5fcc373.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&rcl=20260419152216E0942525C5B7EDFD2C67&rrcfp=8a172a1a&x-expires=1777188137&x-signature=V2zpPd3vrx79Va7GBHQxKjqTJsg%3D" 
+                             alt="Promoter collaborations" 
+                             class="w-full h-auto">
+                    </div>
+                </div>
+                
+                <!-- Ad Promotion -->
+                <div class="card bg-gradient-to-br from-white to-blue-50">
+                    <div class="flex items-start">
+                        <div class="bg-secondary/10 p-3 rounded-full mr-4">
+                            <i class="fa fa-bullhorn text-2xl text-secondary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Ad Promotion</h3>
+                            <p class="text-gray-600 mb-4">
+                                Your products will be featured in highly targeted ads across multiple platforms
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fa fa-check text-green-500 mr-2"></i>
+                                    <span>Professional ad creative design</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa fa-check text-green-500 mr-2"></i>
+                                    <span>Targeted audience selection</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa fa-check text-green-500 mr-2"></i>
+                                    <span>Performance tracking and optimization</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 rounded-xl overflow-hidden">
+                        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/fe8bdb8063094b74a0be3eae8ba02ce3~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260419152216E0942525C5B7EDFD2C67&rrcfp=f06b921b&x-expires=1779175407&x-signature=iYVozKUWa6JFVx6Jjh7zkcbVL7A%3D" 
+                             alt="Digital advertising campaign" 
+                             class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="section-padding">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Choose Your Package</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    We offer two packages to suit your business needs and budget
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <!-- Basic Package -->
+                <div id="basic-package" class="package-card bg-gradient-to-br from-white to-indigo-50 border border-indigo-100" style="--tw-gradient-from: #6366f1; --tw-gradient-to: #8b5cf6;">
+                    <div class="absolute top-4 right-4 bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">
+                        FREE
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Basic Package</h3>
+                    <div class="flex items-end mb-6">
+                        <span class="text-4xl font-bold text-primary">FREE</span>
+                        <span class="text-gray-500 ml-2">Value $500</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold text-lg mb-3">Package Includes:</h4>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>5 Matched Promoters</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                <span>$200 Ad Credit</span>
+                            </li>
+                        </ul>
+                        
+                        <h4 class="font-bold text-lg mb-3">Requirements:</h4>
+                        <ul class="space-y-2 border-t border-gray-200 pt-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-star text-primary mt-1 mr-3"></i>
+                                <span>MYBIZ store with 10+ products</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-star text-primary mt-1 mr-3"></i>
+                                <span>Stripe payment method connected</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <a href="https://wa.me/+8613855664834" target="_blank" class="btn-primary w-full text-center block">Apply Now</a>
+                </div>
+                
+                <!-- Advanced Package -->
+                <div id="advanced-package" class="package-card bg-gradient-to-br from-white to-pink-50 border border-pink-100" style="--tw-gradient-from: #ec4899; --tw-gradient-to: #db2777;">
+                    <div class="absolute top-4 right-4 bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full">
+                        FREE PREMIUM
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Advanced Package</h3>
+                    <div class="flex items-end mb-6">
+                        <span class="text-4xl font-bold text-secondary">FREE</span>
+                        <span class="text-gray-500 ml-2">Value $2,000</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold text-lg mb-3">Package Includes:</h4>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>15+ Matched Promoters</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-secondary mt-1 mr-3"></i>
+                                <span>$2,000 Ad Credit</span>
+                            </li>
+                        </ul>
+                        
+                        <h4 class="font-bold text-lg mb-3">Requirements:</h4>
+                        <ul class="space-y-2 border-t border-gray-200 pt-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-star text-secondary mt-1 mr-3"></i>
+                                <span>MYBIZ store with $2,000+ in sales</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-star text-secondary mt-1 mr-3"></i>
+                                <span>50+ products uploaded</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <a href="https://wa.me/+8613855664834" target="_blank" class="btn-primary w-full text-center block">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section id="testimonials" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Success Stories</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    See how other online stores have grown with our program
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "The Basic Package helped us reach a whole new audience. We saw a 150% increase in website traffic and a 45% boost in sales within just two weeks!"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl">
+                            J
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Jane Smith</h4>
+                            <p class="text-sm text-gray-500">Owner, Glow Beauty Co.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "The Advanced Package was worth every penny. Working with multiple promoters and having professional ads created for us resulted in a 300% ROI in the first month."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold text-xl">
+                            M
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Michael Chen</h4>
+                            <p class="text-sm text-gray-500">Founder, TechGadgets</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-500">4.5</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        "As a small business just starting out, the Basic Package gave us the exposure we needed. The promoters were professional and the ad credits helped stretch our budget."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xl">
+                            S
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-500">CEO, EcoLiving</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-padding">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Everything you need to know about our program
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-bold text-lg">Is this program really free?</span>
+                        <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            Yes! Both our Basic and Advanced packages are completely free for qualified applicants. You just need to meet the requirements for each package to unlock these valuable marketing services. This is a limited-time offer, so make sure to apply before April 30, 2026.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-bold text-lg">How are promoters matched to my products?</span>
+                        <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            Our algorithm analyzes your product category, target audience, and brand aesthetic to match you with promoters whose followers align with your ideal customers. You'll have the final say on which promoters you work with.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-bold text-lg">How long does it take to see results?</span>
+                        <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            Most businesses start seeing increased traffic within the first week of the campaign launch. Sales typically begin to increase within 2-3 weeks as more people discover your products through creator content and ads.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="font-bold text-lg">What happens after I apply?</span>
+                        <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6">
+                        <p class="text-gray-600">
+                            Once you apply, our team will review your application within 48 hours. If approved, you'll receive an email with next steps to set up your campaign and select your package. We'll then begin matching you with creators and setting up your ad campaigns.
+                        </p>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <a href="#" class="text-2xl font-bold text-white mb-4 inline-block">MYBIZ</a>
+                    <p class="text-gray-400">
+                        Helping online stores grow through promoter collaborations and targeted advertising.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#packages" class="text-gray-400 hover:text-white transition-colors">Packages</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+        
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Guide</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-envelope text-gray-400 mt-1 mr-2"></i>
+                            <span class="text-gray-400">support@mybiz.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-phone text-gray-400 mt-1 mr-2"></i>
+                            <span class="text-gray-400">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker text-gray-400 mt-1 mr-2"></i>
+                            <span class="text-gray-400">123 Marketing St, San Francisco, CA 94105</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2026 MYBIZ. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script>
+        // Initialize GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero section animations
+            gsap.from('.hero-gradient h1', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                delay: 0.2
+            });
+            
+            gsap.from('.hero-gradient p', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                delay: 0.4
+            });
+            
+            gsap.from('.hero-gradient .btn-primary, .hero-gradient .btn-secondary', {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                delay: 0.6,
+                stagger: 0.2
+            });
+            
+            gsap.from('.hero-gradient img', {
+                opacity: 0,
+                scale: 0.9,
+                duration: 1,
+                delay: 0.8
+            });
+            
+            // Scroll animations
+            gsap.utils.toArray('.card, .package-card').forEach(card => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top bottom-=100',
+                        toggleActions: 'play none none none'
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8
+                });
+            });
+            
+            // FAQ accordion
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+            
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle current FAQ
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('fa-plus');
+                    icon.classList.toggle('fa-minus');
+                    icon.classList.toggle('rotate-45');
+                    
+                    // Close other FAQs
+                    faqToggles.forEach(otherToggle => {
+                        if (otherToggle !== toggle) {
+                            const otherContent = otherToggle.nextElementSibling;
+                            const otherIcon = otherToggle.querySelector('i');
+                            
+                            if (!otherContent.classList.contains('hidden')) {
+                                otherContent.classList.add('hidden');
+                                otherIcon.classList.add('fa-plus');
+                                otherIcon.classList.remove('fa-minus');
+                                otherIcon.classList.remove('rotate-45');
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Countdown timer
+            function updateCountdown() {
+                const now = new Date();
+                const endDate = new Date('April 30, 2026 23:59:59 PST');
+                const diff = endDate - now;
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').querySelector('div:first-child').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').querySelector('div:first-child').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').querySelector('div:first-child').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').querySelector('div:first-child').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            // Update countdown every second
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+
+        });
+    </script>
+</body>
+</html>
